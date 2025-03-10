@@ -11,7 +11,7 @@ def fanmail_list(request):
 @login_required
 def fanmail_create(request):
     if request.method == "POST":
-        form = FanMailForm(request.POST)
+        form = FanMailForm(request.POST, request.FILES) 
         if form.is_valid():
             fanmail = form.save(commit=False)
             fanmail.user = request.user
@@ -25,7 +25,7 @@ def fanmail_create(request):
 def fanmail_update(request, pk):
     fanmail = get_object_or_404(FanMail, pk=pk, user=request.user)
     if request.method == "POST":
-        form = FanMailForm(request.POST, instance=fanmail)
+        form = FanMailForm(request.POST, request.FILES, instance=fanmail)  
         if form.is_valid():
             form.save()
             return redirect("fanmail_list")
