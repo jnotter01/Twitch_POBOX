@@ -1,0 +1,17 @@
+# Ignore the environment file with secret keys
+.env
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment folder
+venv/
+
+# Ignore database (optional, only if you're using SQLite locally)
+db.sqlite3
+
+# Ignore static and media files in production
+/staticfiles/
+/media/
