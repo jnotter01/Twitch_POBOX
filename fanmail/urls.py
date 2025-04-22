@@ -7,3 +7,7 @@ urlpatterns = [
     path("<int:pk>/edit/", views.fanmail_update, name="fanmail_update"),  # Edit fan mail
     path("<int:pk>/delete/", views.fanmail_delete, name="fanmail_delete"),  # Delete fan mail
 ]
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
