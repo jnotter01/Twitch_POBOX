@@ -100,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Redirect users to the home page after login
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = '/fanmail/'
 LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views  # Import views from the fanmail app
+from . import views  
 
 urlpatterns = [
     path("", views.fanmail_list, name="fanmail_list"),  # View all fan mail

@@ -11,14 +11,11 @@
 
 {% for mail in fanmails %}
     <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-        <p><strong>{{ mail.subject }}</strong></p>
-		{% if mail.image %}
-			<img src="{{ mail.image.url }}" alt="Fan Mail Image" style="max-width: 300px;">
-		{% endif %}
-
+        {% if mail.image %}
+            <img src="{{ mail.image.url }}" alt="Fan Mail Image" style="max-width: 300px;">
+        {% endif %}
         <p>{{ mail.message }}</p>
         <p><em>Sent by: {{ mail.user.username }}</em></p>
-		
         {% if user == mail.user %}
             <a href="{% url 'fanmail_update' mail.pk %}">Edit</a> |
             <a href="{% url 'fanmail_delete' mail.pk %}">Delete</a>
