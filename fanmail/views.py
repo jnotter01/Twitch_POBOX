@@ -35,7 +35,12 @@ def fanmail_update(request, pk):
         form = FanMailForm(request.POST, request.FILES, instance=fanmail)  
         if form.is_valid():
             form.save()
+            if request.headers.get("x-requested-with") == "XMLHttpRequest":
+                return JsonResponse({"success": True})
             return redirect("fanmail_list")
+        else:
+            if request.headers.get("x-requested-with") == "XMLHttpRequest":
+                return JsonResponse({"success": False, "error": "Invalid form data."}, status=400)
     else:
         form = FanMailForm(instance=fanmail)
     return render(request, "fanmail/fanmail_form.html", {"form": form})

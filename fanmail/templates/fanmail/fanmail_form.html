@@ -1,10 +1,59 @@
 {% extends "base.html" %}
+
+{% block title %}Write Fan Mail{% endblock %}
+
 {% block content %}
-<h2>Fan Mail</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<h2>Write Fan Mail</h2>
+
+<div id="fanmail-form">
+    <form method="post" enctype="multipart/form-data" id="ajax-fanmail-form"
+          action="{% if form.instance.pk %}{% url 'fanmail_update' form.instance.pk %}{% else %}{% url 'fanmail_create' %}{% endif %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<div id="fanmail-messages"></div>
+
 <a href="{% url 'fanmail_list' %}">Back</a>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('ajax-fanmail-form');
+
+    if (form) {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = "{% url 'fanmail_list' %}";
+                } else {
+                    document.getElementById('fanmail-messages').innerHTML =
+                        '<p style="color:red;">' + (data.error || 'Submission failed.') + '</p>';
+                }
+            } catch (error) {
+                console.error("AJAX error:", error);
+                document.getElementById('fanmail-messages').innerHTML =
+                    '<p style="color:red;">Something went wrong. Try again.</p>';
+            }
+        });
+    }
+});
+</script>
 {% endblock %}
