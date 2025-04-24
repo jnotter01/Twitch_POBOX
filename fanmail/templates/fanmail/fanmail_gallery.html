@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Fan Mail Gallery{% endblock %}
+
+{% block content %}
+<h2>Fan Mail Gallery</h2>
+
+<div class="gallery-grid">
+    {% for mail in fanmails %}
+        <div class="gallery-card">
+            {% if mail.image %}
+                <img src="{{ mail.image.url }}" alt="Fan mail image" class="gallery-img">
+            {% endif %}
+            <h3>{{ mail.title }}</h3>
+            <p>{{ mail.message }}</p>
+            <small>Sent on {{ mail.created_at|date:"M d, Y" }}</small>
+        </div>
+    {% empty %}
+        <p>No fan mail yet!</p>
+    {% endfor %}
+</div>
+<a href="/" class="btn">Back to Home</a>
+{% endblock %}

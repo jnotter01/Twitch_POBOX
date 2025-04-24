@@ -12,15 +12,18 @@
     <header>
         <h1>Welcome to Fan Mail App</h1>
         <nav>
+			|<a href="{% url 'fanmail_list' %}">Home</a> |
+			<a href="{% url 'fanmail_gallery' %}">Gallery</a> |
+			<a href="{% url 'package_notify' %}">Send Package Notification</a> |
+			<a href="{% url 'my_packages' %}">My Package Submissions</a> |
             <a href="{% url 'login' %}">Login</a> |
-
             <!-- Fixed Logout Button: now styled to be visible -->
             <form method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" style="background:none;border:none;color:#000;cursor:pointer;">
                     Logout
                 </button>
-            </form>
+            </form> |
         </nav>
     </header>
     <main>

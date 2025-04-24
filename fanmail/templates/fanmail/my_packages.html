@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}My Package Submissions{% endblock %}
+
+{% block content %}
+<h2>My Package Submissions</h2>
+
+{% if packages %}
+    <ul>
+        {% for package in packages %}
+            <li>
+                <strong>Sent Date:</strong> {{ package.sent_date }}<br>
+                <strong>Note:</strong> {{ package.message|linebreaks }}<br>
+                <small>Submitted on {{ package.created_at|date:"M d, Y H:i" }}</small>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't submitted any package notifications yet.</p>
+{% endif %}
+
+<a href="{% url 'fanmail_list' %}">Back to Home</a>
+{% endblock %}

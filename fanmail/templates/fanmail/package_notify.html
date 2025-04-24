@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Notify Package Sent{% endblock %}
+{% block content %}
+<h2>Let us know you've sent a package</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Notify</button>
+</form>
+
+<a href="{% url 'fanmail_list' %}">Back</a>
+{% endblock %}
