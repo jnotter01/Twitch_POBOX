@@ -6,7 +6,7 @@
 <h2>Write Fan Mail</h2>
 
 <div id="fanmail-form">
-    <form method="post" enctype="multipart/form-data" id="ajax-fanmail-form"
+    <form method="post" enctype="multipart/form-data" id="ajax-fanmail-form" class="form-card"
           action="{% if form.instance.pk %}{% url 'fanmail_update' form.instance.pk %}{% else %}{% url 'fanmail_create' %}{% endif %}">
         {% csrf_token %}
         {{ form.as_p }}

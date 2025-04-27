@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Notify Package Sent{% endblock %}
 {% block content %}
-<h2>Let us know you've sent a package</h2>
+<h2>Let me know you've sent a package</h2>
 
-<form method="post">
+<form method="post" class="form-card">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Notify</button>
